@@ -39,9 +39,9 @@ class Unit_Test:
             for i in t:
                 if (not self.app.test(*i.split())):
                     self.error_line = row
-                    return False
+                    return (False, row)
                 row += 1
-            return True
+            return (True, -1)
     def get_error_line(self):
         return self.error_line
     def set_test_name(self, name):

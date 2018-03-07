@@ -21,11 +21,18 @@ class SolutionsListView(generic.ListView):
     
 def upload_solution(request, task_id):
     task = get_object_or_404(models.Task, pk=task_id)
-    solutions = task.solutions_set
+    user = request.user
     if (request.method == 'POST'):
         file = request.FILES['solution']
-        solution = solutions.create(source=file)
-        solution.save()
+        solution = models.Solutions(
+            task = task,
+            created_by = user,
+            source = file
+        )
+        units = rt.Unit_Test(str(solution.source), str(task.test_file))
+        solution.tests_passed = units.run_tests()
+        solution.save(force_insert=True)
+        # Here redirect to solutions_view
         return HttpResponseRedirect(reverse('codeload:task', args=(task_id, )))
 
 def run_solution(request, solution_id, in_data):
