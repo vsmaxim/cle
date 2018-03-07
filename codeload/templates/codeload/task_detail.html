@@ -1,0 +1,11 @@
+{% if task %}
+<h1>{{ task.task_name }}</h1>
+<p>{{ task.task_text }}</p>
+<form action="upload/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="solution" id="file">
+    <input type="submit" value="Check">
+</form>
+{% else %}
+<h1> Task not specified! </h1>
+{% endif %} 
