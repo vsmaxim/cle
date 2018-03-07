@@ -6,9 +6,7 @@ from . import views
 
 app = 'acc'
 urlpatterns = [
-    path('', views.index, name='auth_page'),
-    path('<str:error>', views.index, name='auth_failed'),
-    path('login/', views.login, name='login'),
-    path('logout/', views.logout, name='logout'),
+    path('', views.auth, name='login'),
+    path('logout/', views.leave, name='logout'),
     path('register/', views.register, name = 'register'),
 ]

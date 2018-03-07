@@ -1,9 +1,8 @@
 {% if error %}
 <h1> {{ error }} </h1>
 {% endif %}
-
 <form action="" method="post">
     {% csrf_token %}
     {{ form }}
-    <input type="submit" value="login">
+    <input type="submit" value="Зарегистрироваться">
 </form>
