@@ -4,7 +4,7 @@ from django.conf.urls import url, include
 
 from . import views
 
-app = 'acc'
+app_name = 'acc'
 urlpatterns = [
     path('', views.auth, name='login'),
     path('logout/', views.leave, name='logout'),

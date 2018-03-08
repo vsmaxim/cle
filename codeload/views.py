@@ -29,14 +29,27 @@ def upload_solution(request, task_id):
             created_by = user,
             source = file
         )
+        solution.save(force_insert=True)        
+        print(solution.source)
+        print(task.test_file)
         units = rt.Unit_Test(str(solution.source), str(task.test_file))
         solution.tests_passed = units.run_tests()
-        solution.save(force_insert=True)
         # Here redirect to solutions_view
-        return HttpResponseRedirect(reverse('codeload:task', args=(task_id, )))
+        return run_solution(request, solution)
 
-def run_solution(request, solution_id, in_data):
-    solution = get_object_or_404(models.Solutions, pk=solution_id)
-    app = rt.App(str(solution.source))
-    app.build()
-    return HttpResponse(app.run(in_data))
+def run_solution(request, solution):
+    task = solution.task
+    print(str(solution.source))
+    app = rt.Unit_Test(
+        str(solution.source),
+        str(task.test_file)
+    )
+    return HttpResponse(app.run_tests())
+
+def index(request):
+    return render(request, 'codeload/index.html')
+
+
+class TaskListView(generic.ListView):
+    model = models.Task
+    context_object_name = 'tasks'

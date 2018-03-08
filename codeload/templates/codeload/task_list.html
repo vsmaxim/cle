@@ -1,0 +1,5 @@
+<ul>
+    {% for task in tasks %}
+        <li><a href="{% url task %}/{{ task.pk }}"></a></li>
+    {% endfor %}
+</ul>

@@ -22,7 +22,9 @@ class App:
             return run.stdout
         raise IOError("Looks like application is not built")        
     def test(self, input, output):
-            return self.run(input) == str(output)
+            out = self.run(input)
+            print(f'Input: {input}\nExpected: {output.strip()}\nGot: {out}')
+            return self.run(input) == str(output.strip())
     def __repr__(self):
         with open(self.name) as source:
             return ''.join([i for i in source])
@@ -32,12 +34,14 @@ class Unit_Test:
         self.app = App(source_name)
         self.app.build()
         self.error_line = None
+        # Test line should be like 'input, output'
+        # e.g. '123 123, 246' 
         self.tname = tests_name
     def run_tests(self):
         with open(self.tname, 'r') as t:
             row = 0
             for i in t:
-                if (not self.app.test(*i.split())):
+                if (not self.app.test(*i.split(','))):
                     self.error_line = row
                     return (False, row)
                 row += 1
@@ -49,5 +53,5 @@ class Unit_Test:
     
 
 if __name__ == '__main__':
-    app = App("main-not-minified.cpp")
-    print(app)
+    app = Unit_Test('../uploads/1.cpp', '../solution_tests/1.txt')
+    print(app.run_tests())

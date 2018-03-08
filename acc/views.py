@@ -43,9 +43,8 @@ def register(request):
             return redirect('codeload:task', pk = 1)
         else:
             error = 'Something went wrong...'
-    else:
-        registration_form = UserCreationForm()
-        return render(request, 'acc/registration.html', {
-            'form': registration_form,
-            'error': error
-        })
+    registration_form = UserCreationForm()
+    return render(request, 'acc/registration.html', {
+        'form': registration_form,
+        'error': error
+    })
