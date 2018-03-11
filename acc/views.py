@@ -6,7 +6,6 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 # Create your views here.
 
-
 def auth(request):
     error = None
     if (request.method == 'POST'):
@@ -20,6 +19,7 @@ def auth(request):
         else:
             error = 'Login incorrect'
     login_form = AuthenticationForm()
+    
     return render(request, 'acc/login.html', {
             'form' : login_form,
             'error': error

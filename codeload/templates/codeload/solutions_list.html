@@ -1,11 +1,14 @@
 {% if task_solutions_list %}
-    <ul>
+    <table>
         {% for task in task_solutions_list %}
-        <li>
-            <a href="#">Run test {{task.id}}</a>            
-        </li>
-        {% endfor %}    
-    </ul>
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.created_by.username }}</td>
+                <td>{{ task.task.task_name }}</td>
+                <td>{{ task.tests_passed }}</td>
+            </tr>
+        {% endfor %}
+    </table>
     
 {% else %}
 <h1>There's no solutions</h1>

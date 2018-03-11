@@ -1,9 +1,12 @@
-{% if error %}
-<h1> {{ error }} </h1>
-{% endif %}
+{% extends 'acc/base.html' %}
+{% block form %}
+    {% if error %}
+    <h1> {{ error }} </h1>
+    {% endif %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="login">
-</form>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="login">
+    </form>
+{% endblock %}

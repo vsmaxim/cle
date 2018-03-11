@@ -1,6 +1,20 @@
+{% extends 'codeload/base.html' %}
+{% block style %}
+{% endblock %}
+{% block content %}
 {% if task %}
-<h1>{{ task.task_name }}</h1>
-<p>{{ task.task_text }}</p>
+<div class="container">
+    <div class="row">
+        <div class="col" align="center">
+            <h2>Задача {{ task.id }}. {{ task.task_name }}</h1>    
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" align="center">
+                <p>{{ task.task_text }}</p>
+        </div>
+    </div>
+</div>
 <form action="upload/" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="file" name="solution" id="file">
@@ -9,3 +23,4 @@
 {% else %}
 <h1> Task not specified! </h1>
 {% endif %} 
+{% endblock %}
