@@ -1,5 +1,14 @@
+{% extends 'codeload/base.html' %}
+{% block style %}
+{% endblock %}
+{% block content %}
 <ul>
-    {% for task in tasks %}
-        <li><a href="{% url task %}/{{ task.pk }}"></a></li>
+    {% for tk in tasks %}
+    <div class="row">
+        <div class="col">
+            <a href="../task/{{tk.pk}}">Задача {{tk.pk}}. {{tk.task_name}}</a>            
+        </div>
+    </div>    
     {% endfor %}
 </ul>
+{% endblock %}

@@ -10,4 +10,5 @@ urlpatterns = [
     path('task/<int:task_id>/upload/', views.upload_solution, name='upload'),
     path('view/<int:pk>/', views.SolutionsListView.as_view(), name='solution'),
     path('run/<int:solution_id>/<str:in_data>/', views.run_solution, name='run_solution'),
+    path('solutionslist/', views.show_all_solutions, name='all_solutions'),
 ]

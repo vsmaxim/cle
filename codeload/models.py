@@ -12,3 +12,8 @@ class Solutions(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     source = models.FileField(upload_to='uploads/', null=True)
     tests_passed = models.IntegerField(default = 0)
+
+class Leadership(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    count_solved = models.IntegerField(default = 0)
+    solved_string = models.CharField(max_length=1000, default='[]')

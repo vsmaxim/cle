@@ -11,15 +11,46 @@
     </div>
     <div class="row">
         <div class="col" align="center">
+            <a href="/view/{{task.id}}">Решения</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" align="center">
                 <p>{{ task.task_text }}</p>
         </div>
     </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Входные данные
+                    </th>
+                    <th>
+                        Выходные данные
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for test in tests %}
+                    <tr>
+                        <td>{{test.0}}</td>
+                        <td>{{test.1}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
-<form action="upload/" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="file" name="solution" id="file">
-    <input type="submit" value="Check">
-</form>
+<div class="row">
+    <div class="col" align="center">
+            <form action="upload/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="solution" id="file">
+                <input type="submit" value="Check">
+            </form> 
+    </div>
+</div>
 {% else %}
 <h1> Task not specified! </h1>
 {% endif %} 
