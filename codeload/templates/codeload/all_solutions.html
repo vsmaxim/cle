@@ -22,10 +22,14 @@
                     {{ solution.created_by }}
                 </td>
                 <td>
-                    {% if solution.tests_passed >= 0 %}
-                        Частичное решение, тест {{ solution.tests_passed }}
+                    {% if solution.running %}
+                        Тестируется
                     {% else %}
-                        Полное решение
+                        {% if solution.tests_passed >= 0 %}
+                            Частичное решение, тест {{ solution.tests_passed }}
+                        {% else %}
+                            Полное решение
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>

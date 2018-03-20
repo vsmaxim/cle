@@ -1,0 +1,21 @@
+{% extends 'codeload/base.html' %}
+{% block style %}
+{% endblock %}
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Пользователь</th>
+                <th>Рейтинг (число решённых задач)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rate %}
+                <tr>
+                    <td>{{ row.user.username }}</td>
+                    <td>{{ row.count_solved }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

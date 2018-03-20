@@ -8,6 +8,8 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 def auth(request):
     error = None
+    if request.user.is_authenticated:
+        return redirect('codeload:tasklist')
     if (request.method == 'POST'):
         login_form = AuthenticationForm(request.POST)
         username = request.POST['username']
@@ -15,7 +17,7 @@ def auth(request):
         user = authenticate(request, username = username, password = password)
         if not user is None:
             login(request, user)
-            return redirect('codeload:task', pk = 1)
+            return redirect('codeload:tasklist')
         else:
             error = 'Login incorrect'
     login_form = AuthenticationForm()
@@ -28,7 +30,7 @@ def auth(request):
 def leave(request):
     logout(request)
     # Change it
-    return redirect('http://yandex.ru')
+    return redirect('codeload:index')
 
 def register(request):
     error = None
@@ -40,7 +42,7 @@ def register(request):
             password = registration_form.cleaned_data.get('password')
             user = authenticate(request, username = username, password = password)
             login(request, user)
-            return redirect('codeload:task', pk = 1)
+            return redirect('codeload:tasklist')
         else:
             error = 'Something went wrong...'
     registration_form = UserCreationForm()
