@@ -6,7 +6,7 @@ from . import views
 
 app_name = 'acc'
 urlpatterns = [
-    path('', views.auth, name='login'),
-    path('logout/', views.leave, name='logout'),
-    path('register/', views.register, name = 'register'),
+    path('', views.UserSignInView.as_view(), name='login'),
+    path('logout/', views.UserSignOutView.as_view(), name='logout'),
+    path('register/', views.register, name='register'),
 ]

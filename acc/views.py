@@ -2,35 +2,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.views import LoginView, LogoutView
 
 
-# Create your views here.
+class UserSignInView(LoginView):
+    template_name = 'acc/login.html'
+    redirect_authenticated_user = True
 
-def auth(request):
-    error = None
-    if request.user.is_authenticated:
-        return redirect('codeload:tasklist')
-    if (request.method == 'POST'):
-        login_form = AuthenticationForm(request.POST)
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username = username, password = password)
-        if not user is None:
-            login(request, user)
-            return redirect('codeload:tasklist')
-        else:
-            error = 'Login incorrect'
-    login_form = AuthenticationForm()
-    
-    return render(request, 'acc/login.html', {
-            'form' : login_form,
-            'error': error
-    })
 
-def leave(request):
-    logout(request)
-    # Change it
-    return redirect('codeload:index')
+class UserSignOutView(LogoutView):
+    pass
+
 
 def register(request):
     error = None
